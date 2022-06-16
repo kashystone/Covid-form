@@ -1,156 +1,85 @@
-let rowEdit
-let submitBtnn = document.getElementById("subBtn");
+const tableElement = document.getElementById('table'),
+    form1 = document.getElementById("myForm"),
+    form2 = document.getElementById("myForm2"),
+    updateDiv = document.getElementById("upDate");
+let rows = tableElement.children[1].getElementsByTagName('tr');
 
+function checkBoxValue(box) {
+  if (box.checked) {
+      box.value = "Yes";
+  } else {
+      box.value = "No";
+  }
+}
 
 function publishToTable() {
-  if (submitBtnn.innerHTML == "Submit") {
+  tableElement.style.display="block";
+  let trElement = document.createElement('tr'),
+      nameEle = document.createElement('td'),
+      emailEle = document.createElement('td'),
+      genderEle = document.createElement('td'),
+      checkboxEle = document.createElement('td'),
+      editEle = document.createElement('td'),
+      delEle = document.createElement('td');
+  nameEle.innerHTML = document.getElementById('first-name').value + " " + document.getElementById('last-name').value.toUpperCase();
+  emailEle.innerHTML = document.getElementById('email').value;
+  genderEle.innerHTML = document.getElementById('gender').value;
+  checkboxEle.innerHTML = document.getElementById("checkBox").value;
+  editEle.innerHTML = "<input type='button' class='edit-button' value='Edit' onclick='edit(this)'>";
+  delEle.innerHTML = "<input type='button' class='delete-button' value='Delete' onclick='delBtn(this)'>";
+  trElement.appendChild(nameEle);
+  trElement.appendChild(emailEle);
+  trElement.appendChild(genderEle);
+  trElement.appendChild(checkboxEle);
+  trElement.appendChild(editEle);
+  trElement.appendChild(delEle);
+  form1.reset();
+ tableElement.children[1].insertBefore(trElement, tableElement.children[0].childNodes[trElement.length]);
+  return false;
+};
 
-    const firstName = document.getElementById('first-name').value;
-    const lastName = document.getElementById('last-name').value;
-    const email = document.getElementById('email').value;
-    const gender = document.getElementById('gender').value;
-    checkbox = document.getElementById('checkBox').checked;
-    let check
-    if (checkbox === true) {
-      check = "Yes"
-    }
-    else {
-      check = "No"
-    };
-
-    const error = document.getElementById('error');
-    error.innerHTML = (!firstName || !email || !lastName || !gender) ? 'All values are required.' : '';
-    if (firstName && email && gender && checkBox) {
-      const tableElement = document.getElementById('table');
-      const trElement = document.createElement('tr');
-      const tbodyElement = document.createElement('tbody');
-      const nameEle = document.createElement('td');
-      const emailEle = document.createElement('td');
-      const genderEle = document.createElement('td');
-      const checkboxEle = document.createElement('td');
-      const editBtn = document.createElement('td');
-      const delBtn = document.createElement('td');
-
-
-      nameEle.innerHTML = document.getElementById('first-name').value + " " + document.getElementById('last-name').value.toUpperCase();
-      emailEle.innerHTML = email;
-      genderEle.innerHTML = gender;
-      checkboxEle.innerHTML = check;
-      editBtn.innerHTML = `<button  id="buttoEdit" class="edit-btn" >Edit</button>`;
-      delBtn.innerHTML = `<button class="del-btn" >Delete</button>`;
-
-
-      trElement.appendChild(nameEle);
-      trElement.appendChild(emailEle);
-      trElement.appendChild(genderEle);
-      trElement.appendChild(checkboxEle);
-      trElement.appendChild(editBtn);
-      trElement.appendChild(delBtn);
-      tbodyElement.appendChild(trElement);
-      tableElement.appendChild(tbodyElement);
-      
-      tableElement.style.display="block";
-
-
-
-
-      editBtn.addEventListener("click", function (e) {
-        rowEdit = e.target.parentNode.parentNode;
-        document.getElementById('first-name').value = firstName;
-        document.getElementById('last-name').value = lastName;
-        document.getElementById('email').value = email;
-        document.getElementById('gender').value = gender;
-        document.getElementById('checkBox').checked = check;
-
-
-        submitBtnn.innerHTML = "Update";
-
-      })
-
-      delBtn.addEventListener("click", function () {
-        let del = delBtn.parentNode.rowIndex;
-        tableElement.deleteRow(del);
-        delBtn.remove()
-
-      })
-
-
-    }
-
-  }else{
-    rowEdit.innerHTML = "";
-    submitBtnn.innerHTML = "Submit";
-    const firstName = document.getElementById('first-name').value;
-    const lastName = document.getElementById('last-name').value;
-    const email = document.getElementById('email').value;
-    const gender = document.getElementById('gender').value;
-    checkbox = document.getElementById('checkBox').checked;
-    let check
-    if (checkbox === true) {
-      check = "Yes"
-    }
-    else {
-      check = "No"
-    };
-
-    const error = document.getElementById('error');
-    error.innerHTML = (!firstName || !email || !lastName || !gender) ? 'All values are required.' : '';
-    if (firstName && email && gender && checkBox) {
-      const tableElement = document.getElementById('table');
-      const trElement = document.createElement('tr');
-      const tbodyElement = document.createElement('tbody');
-      const nameEle = document.createElement('td');
-      const emailEle = document.createElement('td');
-      const genderEle = document.createElement('td');
-      const checkboxEle = document.createElement('td');
-      const editBtn = document.createElement('td');
-      const delBtn = document.createElement('td');
-
-
-      nameEle.innerHTML = document.getElementById('first-name').value + " " + document.getElementById('last-name').value.toUpperCase();
-      emailEle.innerHTML = email;
-      genderEle.innerHTML = gender;
-      checkboxEle.innerHTML = check;
-      editBtn.innerHTML = `<button  id="buttoEdit" class="edit-btn" >Edit</button>`;
-      delBtn.innerHTML = `<button class="del-btn" >Delete</button>`;
-
-
-      trElement.appendChild(nameEle);
-      trElement.appendChild(emailEle);
-      trElement.appendChild(genderEle);
-      trElement.appendChild(checkboxEle);
-      trElement.appendChild(editBtn);
-      trElement.appendChild(delBtn);
-      tbodyElement.appendChild(trElement);
-      tableElement.appendChild(tbodyElement);
-
-
-
-
-      editBtn.addEventListener("click", function (e) {
-        rowEdit = e.target.parentNode.parentNode;
-        document.getElementById('first-name').value = firstName;
-        document.getElementById('last-name').value = lastName;
-        document.getElementById('email').value = email;
-        document.getElementById('gender').value = gender;
-        document.getElementById('checkBox').checked = check;
-
-
-        submitBtnn.innerHTML = "Update";
-
-      })
-
-      delBtn.addEventListener("click", function () {
-        let del = delBtn.parentNode.rowIndex;
-        tableElement.deleteRow(del);
-        delBtn.remove()
-
-      })
-    }
-
+function edit(e) {
+  if (e.parentElement.parentElement.cells[3].innerHTML === "No") {
+      document.getElementById('checkBox2').checked = false;
+  } else {
+      document.getElementById('checkBox2').checked = true;
   }
 
 
-}
+  updateDiv.style.display = "block";
+  form1.style.visibility = "hidden";
+  for (let i = 0; i < rows.length; i++) {
+      rows[i].onclick = function editBtn() {
+          let name = this.cells[0].innerHTML,
+              fullName = name.split(" "),
+              firstName = fullName[0],
+              lastName = fullName[1],
+              first = document.getElementById('first-name2'),
+              last = document.getElementById('last-name2'),
+              mail = document.getElementById('email2'),
+              gend = document.getElementById('gender2');
+          first.value = firstName;
+          last.value = lastName;
+          mail.value = this.cells[1].innerHTML;
+          gend.value = this.cells[2].innerHTML;
+      };
 
+    }
+    
+    form2.onsubmit = function updateData() {
+      updateDiv.style.display = "none";
+      form1.style.visibility = "visible";
+      e.parentElement.parentElement.cells[0].innerHTML = document.getElementById('first-name2').value + " " + document.getElementById('last-name2').value;
+      e.parentElement.parentElement.cells[1].innerHTML = document.getElementById('email2').value;
+      e.parentElement.parentElement.cells[2].innerHTML = document.getElementById('gender2').value;
+      e.parentElement.parentElement.cells[3].innerHTML = document.getElementById('checkBox2').value;
+      return false;
+  };
+};
 
+function delBtn(r) {
+  var deleteRow = r.parentNode.parentNode.rowIndex;
+  tableElement.deleteRow(deleteRow);
+};
+
+  

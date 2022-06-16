@@ -1,73 +1,111 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Covid Clearance Form</title>
-        <meta name="description" content="An interactive getting started guide for Brackets.">
-        <link rel="stylesheet" href="main.css">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Covid Clearance Form</title>
+  <meta name="description" content="An interactive getting started guide for Brackets.">
+  <link rel="stylesheet" href="main.css">
 
-    </head>
-    <body>
-      <section class="mySection">
-      <form class="myForm" >
-        <div class="first-name form">
-          <label>First Name: <input id="first-name" type="text"></label>
+</head>
+
+<body>
+  <div class="mySection">
+    <form id="myForm" onsubmit="return publishToTable()">
+      <fieldset>
+        <div>
+          <label for "First Name">First Name: </label><input id="first-name" type="text" required>
         </div>
-        <div class="last-name form">  
-        <label>Last Name: <input id="last-name" type="text"></label>
+        <div>
+          <label for "Last Name">Last Name: </label><input id="last-name" type="text" required>
         </div>
-        <div class="email form">
-          <label>Email: <input id="email" type="text"></label>
+        <div>
+          <label for "Email">Email: </label><input id="email" type="text" required>
         </div>
-        <div class="gender form">
-                    <label for="gender">Gender:
-                    <select required name="male,female" id="gender">
-                      <option value="">Select your Gender</option>
-                      <option value="Male">Male</option>
-                      <option value="Female">Female</option>
-                    </select>
-                  </label>
-                </div>
+        <div>
+          <label for="gender">Gender: </label>
+          <select id="gender" required>
+            <option value="" disabled selected>Select your Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
 
-
-        <div class="travel form checkbox">
-              <input type="checkbox" id="checkBox">
-                <span for="checkbox"> Recently came to Nigeria within the last seven days?</span>
-                
-              </div>
-
-              <span id="error"></span>
-              <div class="submit form">
-              <button id="subBtn" type="reset" onclick="publishToTable()">Submit</button>
-              </div>
-          </form>
-
-         
-        
         </div>
 
-      <div id="tables">
-          <table id="table">
-              <thead>
-                  <tr>
-                      <th>Name</th>
-                      <th>Email</th>
-                      <th>Gender</th>
-                      <th>Came into Nigeria within the last 14 days?</th>
-                      <th></th>
-                      <th></th>
 
-                  </tr>
-              </thead>
-          </table>
-      
+        <div>
+          <input type="checkbox" id="checkBox" class="travel" checked value="Yes" onchange="checkBoxValue(this)">
+          <label for="checkbox" class="checkBoxLabel"> Recently came to Nigeria within the last seven days?</label>
+
+        </div>
+
+        <div>
+          <input class="subBtn" id="subBtn" type="submit" value="Submit">
+        </div>
+
+      </fieldset>
+    </form>
+  </div>
+  <div class="update-div" id="upDate">
+    <form id="myForm2">
+      <fieldset>
+        <div>
+          <label for "First Name">First Name: </label><input id="first-name2" type="text" required>
+        </div>
+        <div>
+          <label for "Last Name">Last Name: </label><input id="last-name2" type="text" required>
+        </div>
+        <div>
+          <label for "Email">Email: </label><input id="email2" type="text" required>
+        </div>
+        <div>
+          <label for="gender">Gender: </label>
+          <select id="gender2" required>
+            <option value="" disabled selected>Select your Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+
+        </div>
+
+
+        <div>
+          <input type="checkbox" id="checkBox2" class="travel" checked value="Yes" onchange="checkBoxValue(this)">
+          <label for="checkbox" class="checkBoxLabel"> Recently came to Nigeria within the last seven days?</label>
+
+        </div>
+
+        <div>
+          <input class="subBtn" id="subBtn2" type="submit" value="Update">
+        </div>
+      </fieldset>
+    </form>
+  </div>
+
+  <div id="tables">
+    <table id="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Gender</th>
+          <th>Came into Nigeria within the last 14 days?</th>
+          <th colspan="2"></th>
+          
+
+        </tr>
+      </thead>
+      <tbody>
+
+      </tbody>
+    </table>
+  </div>
 
 
 
-        <script src="test.js"></script>
-      </section>
-    </body>
+  <script src="test.js"></script>
+  </section>
+</body>
 
 </html>
