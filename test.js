@@ -81,5 +81,3 @@ function delBtn(r) {
   var deleteRow = r.parentNode.parentNode.rowIndex;
   tableElement.deleteRow(deleteRow);
 };
-
-  
